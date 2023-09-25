@@ -29,6 +29,7 @@ PRODUCT_VENDOR_PROPERTIES += \
     debug.sf.hw=0 \
     debug.egl.hw=0 \
     debug.sf.latch_unsignaled=1 \
+    debug.sf.high_fps_late_app_phase_offset_ns=1000000 \
     debug.mdpcomp.logs=0 \
     vendor.gralloc.disable_ubwc=0 \
     vendor.display.disable_scaler=0 \
@@ -55,23 +56,17 @@ PRODUCT_VENDOR_PROPERTIES += \
     vendor.display.camera_noc_efficiency_factor=0.70 \
     vendor.display.disable_layer_stitch=0 \
     vendor.display.secure_preview_buffer_format=420_sp \
-    vendor.gralloc.secure_preview_buffer_format=420_sp
+    vendor.gralloc.secure_preview_buffer_format=420_sp \
+    debug.sf.enable_advanced_sf_phase_offset=1 \
+    debug.sf.high_fps_late_sf_phase_offset_ns=-2000000 \
+    debug.sf.high_fps_early_phase_offset_ns=-5000000 \
+    debug.sf.high_fps_early_gl_phase_offset_ns=-2000000
 endif
 
 ifeq ($(TARGET_BOARD_PLATFORM),monaco)
 PRODUCT_VENDOR_PROPERTIES += \
     vendor.display.disable_layer_stitch=1
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += ro.surface_flinger.max_frame_buffer_acquired_buffers=3
-endif
-
-# Guard QCOM OFFSET props for Bengal, Monaco, Khaje.
-ifeq ($(TARGET_USE_QCOM_OFFSET),true)
-PRODUCT_VENDOR_PROPERTIES += \
-    debug.sf.enable_advanced_sf_phase_offset=1 \
-    debug.sf.high_fps_late_app_phase_offset_ns=1000000 \
-    debug.sf.high_fps_late_sf_phase_offset_ns=-5000000 \
-    debug.sf.high_fps_early_phase_offset_ns=-5000000 \
-    debug.sf.high_fps_early_gl_phase_offset_ns=-5000000
 endif
 
 ifeq ($(TARGET_BOARD_PLATFORM),kona)
